@@ -16,10 +16,6 @@ How to get a case to investigate
     {
       "evidenceType":"gun",
       "evidenceDescription":"A knife on the crime scene"
-    },
-    {
-      "evidenceType":"media",
-      "evidenceDescription":"Records from security cameras"
     }
   ]
 }"
