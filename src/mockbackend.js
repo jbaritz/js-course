@@ -1,3 +1,8 @@
+
+//....................................
+//read this content is cheating >.< !!
+//....................................
+
 (function(){
 
   var validateInterview = function (data){
@@ -118,7 +123,7 @@
           status : 401
         };
 
-      case "/FBI/API/medicalAnalisys" :
+      case "/FBI/API/medicalAnalysis" :
         if(settings.data && settings.type === 'POST'){
           if(settings.data.caseId == 'case-01'
           && validateInjure(settings.data.what)){
