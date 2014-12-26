@@ -89,6 +89,28 @@ How to get a medical analysis
   * "weight" is how importnat is this evidence for the investigation.
   * "acuracy" is how acurate are the results.
 
+How to order to examine media evidence
+--------------------------------------
+
+* URL : `/FBI/API/mediaLaboratory`.
+* Method: POST.
+* Call params:
+  * caseId : the id of the case you are investigating. 
+  * what : a reference to know what to analyze. (ej. 'Weird phone calls.').
+* Response example:
+```
+{
+  "conslusion" : "Pranksters children.",
+  "analysisDuration" : "30min",
+  "acuracy" : 0.95,
+  "weight" : 1
+}
+
+```
+* Where:
+  * "weight" is how importnat is this evidence for the investigation.
+  * "acuracy" is how acurate are the results.
+  
 Get a suspects list
 -------------------
 
