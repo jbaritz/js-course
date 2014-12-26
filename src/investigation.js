@@ -9,6 +9,23 @@
 
     $.get('/FBI/API/case',function(data){
       var caseDetail = JSON.parse(data);
+
+      // defining auxiliar variables
+      var examinationsResults = [];
+
+      // defining callback function to get suspect list
+      var getSuspectLists = function(){
+        for(var i in examinationsResults){
+          var requestData = {
+            caseId : caseDetail.id,
+            characteristics : examinationsResults[i].conclusion
+          };
+          $.get('/FBI/API/suspectsList',requestData,function(data){
+            console.log('suspects',data);
+          },'json');
+        };
+      };
+
       for(var i in caseDetail.evidences){
         switch(caseDetail.evidences[i].evidenceType) {
           case 'witness' :
@@ -17,8 +34,11 @@
               who : caseDetail.evidences[i].evidenceDescription
             };
             $.post('/FBI/API/interview',requestData,function(data){
-              console.log('interview',data);
-            });
+              examinationsResults.push(data);
+              if(examinationsResults.length === 7){
+                getSuspectLists();
+              }
+            },'json');
             break;
           case 'items' :
             var requestData = {
@@ -26,8 +46,11 @@
               what : caseDetail.evidences[i].evidenceDescription
             };
             $.post('/FBI/API/itemLaboratory',requestData,function(data){
-              console.log('item',data);
-            });
+              examinationsResults.push(data);
+              if(examinationsResults.length === 7){
+                getSuspectLists();
+              }
+            },'json');
             break;
           case 'injuries' :
             var requestData = {
@@ -35,8 +58,11 @@
               what : caseDetail.evidences[i].evidenceDescription
             };
             $.post('/FBI/API/medicalAnalysis',requestData,function(data){
-              console.log('medical',data);
-            });
+              examinationsResults.push(data);
+              if(examinationsResults.length === 7){
+                getSuspectLists();
+              }
+            },'json');
             break;
           case 'media' :
             var requestData = {
@@ -44,8 +70,11 @@
               what : caseDetail.evidences[i].evidenceDescription
             };
             $.post('/FBI/API/mediaLaboratory',requestData,function(data){
-              console.log('media',data);
-            });
+              examinationsResults.push(data);
+              if(examinationsResults.length === 7){
+                getSuspectLists();
+              }
+            },'json');
             break;
           default :
             break;
