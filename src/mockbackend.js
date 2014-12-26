@@ -31,6 +31,19 @@
     return false;
   };
 
+  var validateMedia = function (data){
+    if(!data || typeof(data) != "string"){
+      return false
+    }
+    if(data.localeCompare("Records from truck's security cameras.") == 0) {
+      return "/mocks/media1.json";
+    }
+    if(data.localeCompare("Weird phone calls were made to truck drivers.") == 0) {
+      return "/mocks/media2.json";
+    }
+    return false;
+  };
+
   var validateInjure = function (data){
     if(!data || typeof(data) != "string"){
       return false
@@ -40,6 +53,8 @@
     }
     return false;
   };
+
+
 
   var validateSuspectsList = function (data){
     if(!data || typeof(data) != "string"){
@@ -59,6 +74,12 @@
     }
     if(data.localeCompare("Fake Gangsta") == 0) {
       return "/mocks/fg.json";
+    }
+    if(data.localeCompare("Inexperienced mafia crew.") == 0) {
+      return "/mocks/imc.json";
+    }
+    if(data.localeCompare("Disoriented pizza delivery guy.") == 0) {
+      return "/mocks/dpdg.json";
     }
     return false;
   };
@@ -114,6 +135,22 @@
             return {
               responseTime : 1500,
               proxy : validateIntem(settings.data.what)
+            };
+          }
+        }
+        return {
+          responseTime : 500,
+          responseText : "Invalid request",
+          status : 401
+        };
+
+      case "/FBI/API/mediaLaboratory" :
+        if(settings.data && (settings.type === 'POST' || settings.type === 'post')){
+          if(settings.data.caseId == 'case-01'
+          && validateMedia(settings.data.what)){
+            return {
+              responseTime : 1500,
+              proxy : validateMedia(settings.data.what)
             };
           }
         }
