@@ -5,7 +5,7 @@ Very rough API documentation
 How to get a case to investigate
 --------------------------------
 
-* URL : `/FBI/case`.
+* URL : `/FBI/API/case`.
 * Method: GET.
 * Response example:
 ```
