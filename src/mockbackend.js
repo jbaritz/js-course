@@ -75,7 +75,6 @@
   }
 
   $.mockjax(function(settings){
-    console.log("settings!!",settings)
     switch(settings.url){
 
       case '/FBI/API/case' :
