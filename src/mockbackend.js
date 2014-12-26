@@ -75,10 +75,11 @@
   }
 
   $.mockjax(function(settings){
+
     switch(settings.url){
 
       case '/FBI/API/case' :
-        if(settings.type === 'GET') {
+        if(settings.type === 'GET' || settings.type === 'get') {
           return {
             responseTime : 1000,
             proxy: "/mocks/case.json"
@@ -91,7 +92,7 @@
         };
 
       case "/FBI/API/interview" :
-        if(settings.data && settings.type === 'POST'){
+        if(settings.data && (settings.type === 'POST' || settings.type === 'post')){
           if(settings.data.caseId == 'case-01'
           && validateInterview(settings.data.who)){
             return {
@@ -107,7 +108,7 @@
         };
 
       case "/FBI/API/itemLaboratory" :
-        if(settings.data && settings.type === 'POST'){
+        if(settings.data && (settings.type === 'POST' || settings.type === 'post')){
           if(settings.data.caseId == 'case-01'
           && validateIntem(settings.data.what)){
             return {
@@ -123,7 +124,7 @@
         };
 
       case "/FBI/API/medicalAnalysis" :
-        if(settings.data && settings.type === 'POST'){
+        if(settings.data && (settings.type === 'POST' || settings.type === 'post')){
           if(settings.data.caseId == 'case-01'
           && validateInjure(settings.data.what)){
             return {
@@ -139,7 +140,7 @@
         };
 
       case "/FBI/API/suspectsList" :
-        if(settings.data && settings.type === 'GET'){
+        if(settings.data && settings.type === 'GET' || settings.type === 'get'){
           if(settings.data.caseId == 'case-01'
           && validateSuspectsList(settings.data.characteristics)){
             return {
@@ -155,7 +156,7 @@
         };
 
       case "/FBI/API/calculateScore" :
-        if(settings.data && settings.type === 'POST'){
+        if(settings.data && (settings.type === 'POST' || settings.type === 'post')){
           if(settings.data.caseId == 'case-01'
           && validateRankInput(settings.data.rankInput)){
             return {
