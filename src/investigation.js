@@ -12,6 +12,37 @@
 
       // defining auxiliar variables
       var examinationsResults = [];
+      var suspectsHash = {};
+
+      // defining auxiliar functions
+      var addSuspect = function(suspectsHash,suspect,evidenceData){
+        if(suspectsHash[suspect.s_id]){
+          suspectsHash[suspect.s_id].count++;
+          suspectsHash[suspect.s_id].evidences.push({
+            acuracy : evidenceData.acuracy,
+            weight : evidenceData.weight
+          });
+        } else {
+          suspectsHash[suspect.s_id] = {
+            count : 1,
+            name : suspect.name,
+            evidences : [{
+              acuracy : evidenceData.acuracy,
+              weight : evidenceData.weight
+            }]
+          };
+
+        }
+      };
+
+      var requestSuspectsList = function(requestData,evidenceData){
+        $.get('/FBI/API/suspectsList',requestData,function(data){
+          for(var j in data){
+            addSuspect(suspectsHash,data[j],evidenceData);
+            console.log('hash',suspectsHash);
+          };
+        },'json');
+      };
 
       // defining callback function to get suspect list
       var getSuspectLists = function(){
@@ -20,9 +51,7 @@
             caseId : caseDetail.id,
             characteristics : examinationsResults[i].conclusion
           };
-          $.get('/FBI/API/suspectsList',requestData,function(data){
-            console.log('suspects',data);
-          },'json');
+          requestSuspectsList(requestData,examinationsResults[i]);
         };
       };
 
