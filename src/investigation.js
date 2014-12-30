@@ -19,7 +19,7 @@
         if(suspectsHash[suspect.s_id]){
           suspectsHash[suspect.s_id].count++;
           suspectsHash[suspect.s_id].evidences.push({
-            acuracy : evidenceData.acuracy,
+            accuracy : evidenceData.accuracy,
             weight : evidenceData.weight
           });
         } else {
@@ -27,7 +27,7 @@
             count : 1,
             name : suspect.name,
             evidences : [{
-              acuracy : evidenceData.acuracy,
+              accuracy : evidenceData.accuracy,
               weight : evidenceData.weight
             }]
           };
@@ -110,7 +110,6 @@
         };
       };
     });
-
 
     result.textContent = 'he or she still being unknown  :('
   };
