@@ -35,23 +35,91 @@
         }
       };
 
-      var requestSuspectsList = function(requestData,evidenceData){
+      // The last callback, finally
+      var getTheCriminal = function(){
+        var highestScoreOwner = undefined;
+
+        for(var i in suspectsHash){
+          if(highestScoreOwner){
+            if( suspectsHash[i].punctuation > suspectsHash[highestScoreOwner].punctuation){
+              highestScoreOwner = i;
+            }
+          } else {
+            highestScoreOwner = i;
+          }
+        };
+        // writing result
+        result.textContent = suspectsHash[highestScoreOwner].name;
+      };
+
+      var procesingEvidences = function(suspectsInfo,punctationCounter){
+        for(var i in suspectsInfo.evidences){
+
+          var requestParams = {
+            caseId : caseDetail.id,
+            rankInput : {
+              accuracy : suspectsInfo.evidences[i].accuracy,
+              weight : suspectsInfo.evidences[i].weight
+            }
+          };
+
+          $.post('/FBI/API/calculateScore',requestParams,function(data){
+            if(suspectsInfo.punctuation){
+              suspectsInfo.punctuation += data.result;
+            } else {
+              suspectsInfo.punctuation = data.result;
+            }
+            punctationCounter.countDone++;
+            if(punctationCounter.countDone === punctationCounter.countToDo){
+              getTheCriminal();
+            }
+          },'json');
+        };
+      };
+
+      // defining callback to get suspects punctuations
+      var getSuspectPunctiation = function(){
+        var punctationCounter = {
+          countToDo : 0,
+          countDone : 0
+        };
+        for(var i in suspectsHash){
+          punctationCounter.countToDo += suspectsHash[i].evidences.length;
+          procesingEvidences(suspectsHash[i],punctationCounter);
+        }
+      };
+
+      var requestSuspectsList = function(requestData,
+        evidenceData,
+        countRequests,
+        limitRequests){
+
         $.get('/FBI/API/suspectsList',requestData,function(data){
           for(var j in data){
             addSuspect(suspectsHash,data[j],evidenceData);
-            console.log('hash',suspectsHash);
           };
+          countRequests.count++;
+          if(countRequests.count === limitRequests){
+            getSuspectPunctiation();
+          }
         },'json');
       };
 
       // defining callback function to get suspect list
       var getSuspectLists = function(){
+
+        // defining axiliar counter
+        var countRequests = { count : 0};
+
         for(var i in examinationsResults){
           var requestData = {
             caseId : caseDetail.id,
             characteristics : examinationsResults[i].conclusion
           };
-          requestSuspectsList(requestData,examinationsResults[i]);
+          requestSuspectsList(requestData,
+            examinationsResults[i],
+            countRequests,
+            examinationsResults.length);
         };
       };
 
@@ -110,8 +178,6 @@
         };
       };
     });
-
-    result.textContent = 'he or she still being unknown  :('
   };
 
 })();
