@@ -2,6 +2,6 @@
   "conclusion" : "Vito Corleone",
   "interviewDuration" : "2h",
   "interviewLocation" : "Local police station",
-  "acuracy" : 0.8,
+  "accuracy" : 0.8,
   "weight" : 2
 }
