@@ -33,14 +33,14 @@ How to order to interview a witness
   "conslusion" : "Regular burglar",
   "interviewDuration" : "15min",
   "interviewLocation" : "John's restaurant",
-  "acuracy" : 0.99,
+  "accuracy" : 0.99,
   "weight" : 5
 }
 
 ```
 * Where:
   * "weight" is how importnat is this evidence for the investigation.
-  * "acuracy" is how acurate are the results.
+  * "accuracy" is how acurate are the results.
 
 How to order to examine evidence
 ---------------------------------
@@ -56,14 +56,14 @@ How to order to examine evidence
   "conslusion" : "Very common sport shoes.",
   "comment" : "Nothing unusual",
   "analysisDuration" : "2h",
-  "acuracy" : 0.55,
+  "accuracy" : 0.55,
   "weight" : 1
 }
 
 ```
 * Where:
   * "weight" is how importnat is this evidence for the investigation.
-  * "acuracy" is how acurate are the results.
+  * "accuracy" is how acurate are the results.
 
 How to get a medical analysis
 ----------------------------------
@@ -80,14 +80,14 @@ How to get a medical analysis
   "numberOfExaminations" : 15,
   "conclusion" : "They used a 9mm",
   "comment" : "The victims are lucky to be alive."
-  "acuracy" : 0.99,
+  "accuracy" : 0.99,
   "weight" : 10
 }
 
 ```
 * Where:
   * "weight" is how importnat is this evidence for the investigation.
-  * "acuracy" is how acurate are the results.
+  * "accuracy" is how acurate are the results.
 
 How to order to examine media evidence
 --------------------------------------
@@ -102,14 +102,14 @@ How to order to examine media evidence
 {
   "conslusion" : "Pranksters children.",
   "analysisDuration" : "30min",
-  "acuracy" : 0.95,
+  "accuracy" : 0.95,
   "weight" : 1
 }
 
 ```
 * Where:
   * "weight" is how importnat is this evidence for the investigation.
-  * "acuracy" is how acurate are the results.
+  * "accuracy" is how acurate are the results.
   
 Get a suspects list
 -------------------
@@ -144,7 +144,7 @@ How to get the score of a suspect
 * Response example:
 ```
 {    
-  "result" : 1.56,
+  "result" : 1.56
 }
 ```
 
