@@ -16,7 +16,8 @@ How to get a case to investigate
       "evidenceType":"gun",
       "evidenceDescription":"A knife on the crime scene"
     }
-  ]
+  ],
+  "id": 20034
 }"
 ```
 How to order to interview a witness
